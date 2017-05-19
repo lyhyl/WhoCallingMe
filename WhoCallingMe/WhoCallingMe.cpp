@@ -39,6 +39,12 @@ int main(int argc, char* argv[])
 	wprintf(TEXT("Parent PID for %lu is %lu\n"), dwId, ppid);
 	PrintProcessName(ppid);
 
+	wprintf(TEXT("Argvs:\n"));
+	for (size_t i = 0; i < argc; i++)
+	{
+		printf("%s\n", argv[i]);
+	}
+
 	system("pause");
 	return 0;
 }
@@ -52,7 +58,7 @@ void PrintProcessName(const DWORD &ppid)
 	if (Process32First(hThs, &pe)) {
 		do {
 			if (pe.th32ProcessID == ppid) {
-				wprintf(TEXT("name: %s\n"), pe.szExeFile);
+				wprintf(TEXT("Name: %s\n"), pe.szExeFile);
 			}
 		} while (Process32Next(hThs, &pe));
 	}
